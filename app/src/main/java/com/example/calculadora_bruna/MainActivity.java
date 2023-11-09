@@ -65,9 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String buttonText = button.getText().toString(); //Extrair
         //txtSolucao.setText(buttonText); //testando
         String paraCalcular = txtSolucao.getText().toString();
-        //txtSolucao.setText(paraCalcular);
-
-        //paraCalcular = paraCalcular+buttonText; //concatenando
 
         if(buttonText.equals("AC")) //Se o botão for AC
         {
@@ -107,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     String getResult(String data)
     {
-        try
+        try //da biblioteca
         {
             Context context = Context.enter();
             context.setOptimizationLevel(-1);
