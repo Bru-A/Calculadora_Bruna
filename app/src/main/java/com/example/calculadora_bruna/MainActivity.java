@@ -76,35 +76,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(buttonText.equals(("=")))
         {
             txtSolucao.setText(txtResultado.getText()); //Qnd aperta = o que estiver na txt de baixo vai para cima
+            //txtResultado.setText("0");
             return;
         }
 
-        if(buttonText.equals(("C")))
-        {
-            paraCalcular = paraCalcular.substring(0,paraCalcular.length()-1); //apagar o  último caracter
 
-        }
-        else
+        if (buttonText.equals("C"))
         {
-            paraCalcular = paraCalcular+buttonText; //Qualquer outro boão será add ao de txt de cima
+            /*if (paraCalcular.length()<2)
+            {
+                txtSolucao.setText("0");
+            }*/
+
+            if (!paraCalcular.isEmpty())
+            {
+                paraCalcular = paraCalcular.substring(0, paraCalcular.length() - 1); // Apagar o último caractere
+            }
+        } else if (buttonText.matches("[0-9+-/*]")) //Se não for o "C" //buttonText é a variável que recebe a String do botão
+        {
+            if (!paraCalcular.isEmpty() && !buttonText.matches("[0-9]") && paraCalcular.substring(paraCalcular.length() - 1).matches("[+-/*]"))
+            {
+
+                paraCalcular = paraCalcular.substring(0, paraCalcular.length() - 1) + buttonText;
+            } else {
+                paraCalcular = paraCalcular + buttonText; //Qualquer outro boão será add ao de txt de cima
+            }
         }
+
+
+        txtSolucao.setText(paraCalcular);
+
+
         txtSolucao.setText(paraCalcular);
 
         String resultadoFinal = getResult(paraCalcular);
-
-       /*if(txtSolucao.equals(""))
-        {
-            txtSolucao.setText("0");
-        }*/
 
         if(!resultadoFinal.equals("Erro"))
         {
             txtResultado.setText(resultadoFinal);
         }
     }
-    String getResult(String data)
+
+
+    String getResult(String data) //, o método getResult é responsável por avaliar uma expressão matemática ou um código JavaScript que contém essas operações e retornar o resultado da avaliação.
     {
-        try //da biblioteca
+        try //da biblioteca // JavaScript possui suporte embutido para operações matemáticas,
         {
             Context context = Context.enter();
             context.setOptimizationLevel(-1);
